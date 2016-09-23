@@ -10,7 +10,9 @@ require 'vcr'
 require 'rspec'
 
 # Include our Gem
-require 'pfl'
+require 'kickfire'
+require 'pry'
+
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr"
@@ -20,7 +22,7 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
-    FakeWeb.allow_net_connect = false
+    #FakeWeb.allow_net_connect = false
   end
 
   config.after(:suite) do

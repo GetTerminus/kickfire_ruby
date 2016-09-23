@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.kickfire.com/v2/company:(all)?ip=8.8.8.8&key=valid_key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 18:45:19 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.4.45
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - "*"
+      Content-Length:
+      - '654'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"status":"success","results":1,"data":[{"CID":"81472","name":"Google,
+        Inc.","website":"google.com","street":"1600 Amphitheatre Parkway","city":"Mountain
+        View","regionShort":"CA","region":"California","postal":"94043","countryShort":"US","country":"United
+        States","phone":"650-253-0000","employees":"25,000+","revenue":"$1,000,000,000+","category":"Custom
+        Computer Programming Services","sicCode":"7371","category2":"Custom Computer
+        Programming Services","naicsCode":"541511","latitude":"37.422498","longitude":"-122.0843999","stockSymbol":"GOOG","facebook":"Google","twitter":"google","linkedIn":"google","linkedInID":"1441","confidence":77,"isISP":0}]}'
+    http_version:
+  recorded_at: Fri, 23 Sep 2016 18:45:20 GMT
+recorded_with: VCR 3.0.3

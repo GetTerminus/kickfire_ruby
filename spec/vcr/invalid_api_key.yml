@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.kickfire.com/v2/company:(all)?ip=8.8.8.8&key=invalid%20key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 18:45:16 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.4.45
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - "*"
+      Content-Length:
+      - '200'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"status":"error","code":900,"message":"Authorization failed!","description":"Your
+        API key or your domain is not matching our records. Please make sure your
+        key is correct and your IP is authorized."}'
+    http_version: 
+  recorded_at: Fri, 23 Sep 2016 18:45:16 GMT
+recorded_with: VCR 3.0.3
