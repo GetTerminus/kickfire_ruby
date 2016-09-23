@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'kickfire/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "Kickfire"
+  spec.name          = "kickfire"
   spec.version       = Kickfire::VERSION
   spec.authors       = ["Stephen Reid"]
   spec.email         = ["stephen.reid@terminus.com"]
