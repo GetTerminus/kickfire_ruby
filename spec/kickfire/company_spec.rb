@@ -6,9 +6,33 @@ RSpec.describe Kickfire::Company do
   end
 
   describe 'query' do
-    it 'finds with ip' do
+    it 'finds with ip and api key' do
       VCR.use_cassette('8.8.8.8',) do
-        Kickfire::Company.find('8.8.8.8', "valid_key")
+        expect(Kickfire::Company.find('8.8.8.8', api_key: "valid_key").name).to eq 'Google, Inc.'
+      end
+    end
+
+    describe 'with configured api key' do
+      before do
+        stub_const("Kickfire::API_KEY", "valid_key")
+      end
+
+      it 'finds ip with configured key' do
+        VCR.use_cassette('8.8.8.8',) do
+          expect(Kickfire::Company.find('8.8.8.8').name).to eq 'Google, Inc.'
+        end
+      end
+
+      it 'returns a twitter url' do
+        VCR.use_cassette('8.8.8.8',) do
+          expect(Kickfire::Company.find('8.8.8.8').twitter_url).to eq 'http://twitter.com/google'
+        end
+      end
+
+      it 'returns an address' do
+        VCR.use_cassette('8.8.8.8',) do
+          expect(Kickfire::Company.find('8.8.8.8').address).to eq '1600 Amphitheatre Parkway, Mountain View, 94043'
+        end
       end
     end
   end
@@ -16,12 +40,12 @@ RSpec.describe Kickfire::Company do
   describe 'kickfire errors' do
     it 'receives error with no api key' do
       VCR.use_cassette('no api key') do
-        expect{ Kickfire::Company.find('8.8.8.8', nil) }.to raise_error("901 No API Key provided.")
+        expect{ Kickfire::Company.find('8.8.8.8', api_key: nil) }.to raise_error("901 No API Key provided.")
       end
     end
     it 'receives error with invalid api key' do
       VCR.use_cassette('invalid api key') do
-        expect{ Kickfire::Company.find('8.8.8.8',"invalid key") }.to raise_error("900 Authorization failed!")
+        expect{ Kickfire::Company.find('8.8.8.8', api_key: "invalid key") }.to raise_error("900 Authorization failed!")
       end
     end
   end

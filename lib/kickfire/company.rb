@@ -5,6 +5,7 @@ module Kickfire
 
     def initialize(attributes = nil)
       if attributes.kind_of? Array
+        @json = attributes.to_json
         attributes.each do |attribute_hash|
           attribute_hash.each do |k,v|
             instance_variable_set("@#{k.underscore}", v)
@@ -15,12 +16,15 @@ module Kickfire
       end
     end
 
-    def self.find(ip, api_key = nil)
+    def self.find(ip, api_key: nil)
       if !api_key
-        # Find the api key from a config or env variable
+        if defined? Kickfire::API_KEY
+          api_key = Kickfire::API_KEY
+        end
       end
 
       response = HTTParty.get("#{BASE_URL}#{BASE_QUERY}?#{URI.encode_www_form({ip: ip, key: api_key})}")
+
       if !response
         raise StandardError.new('No data returned from Kickfire')
       end
@@ -28,6 +32,8 @@ module Kickfire
       if response && response['status'] == 'error'
         raise StandardError.new("#{response['code']} #{response['message']}")
       end
+
+      new(response['data'])
     end
 
     attr_reader :cid
@@ -55,6 +61,7 @@ module Kickfire
     attr_reader :linkedin
     attr_reader :linedkin_id
     attr_reader :isp
+    attr_reader :to_json
 
     def twitter_url
       "http://twitter.com/" + twitter
@@ -63,6 +70,5 @@ module Kickfire
     def address
       [street, city, regionShort, postal].compact.join ", "
     end
-
   end
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Kickfire (0.0.01)
+    kickfire (0.0.02)
 
 GEM
   remote: https://rubygems.org/
@@ -60,12 +60,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  Kickfire!
   activesupport (<= 4.9)
   bundler (~> 1.6)
   byebug
   fakeweb
   httparty
+  kickfire!
   pry
   rake
   rspec
