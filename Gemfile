@@ -6,7 +6,7 @@ gemspec
 gem 'rspec'
 gem 'httparty'
 gem 'fakeweb'
-gem 'activesupport', '<= 4.9'
+gem 'activesupport'
 gem 'webmock'
 gem 'vcr'
 gem 'pry'
