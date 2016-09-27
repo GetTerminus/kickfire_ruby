@@ -35,6 +35,12 @@ RSpec.describe Kickfire::Company do
         end
       end
 
+      it 'unclaimable ips' do
+        VCR.use_cassette('241.241.241.241') do
+          expect(Kickfire::Company.find('241.241.241.241')).to eq nil
+        end
+      end
+
       it 'returns a twitter url' do
         VCR.use_cassette('8.8.8.8',) do
           expect(Kickfire::Company.find('8.8.8.8').twitter_url).to eq 'http://twitter.com/google'

@@ -27,13 +27,13 @@ module Kickfire
 
       if !response
         raise Kickfire::Error.new('No data returned from Kickfire')
-      end
-
-      if response && response['status'] == 'error'
+      elsif response['status'] == 'error'
         Kickfire::Error.find(response['code'],response['message'])
+      elsif response['status'] == 'not found'
+        nil
+      else
+        new(response['data'])
       end
-
-      new(response['data'])
     end
 
     attr_reader :cid
