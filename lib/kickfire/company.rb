@@ -4,12 +4,10 @@ module Kickfire
     BASE_QUERY = "company:(all)"
 
     def initialize(attributes = nil)
-      if attributes.kind_of? Array
-        @json = attributes.to_json
-        attributes.each do |attribute_hash|
-          attribute_hash.each do |k,v|
-            instance_variable_set("@#{k.underscore}", v)
-          end
+      if attributes.kind_of?(Array) && attributes.first
+        @raw = attributes.first
+        attributes.first.each do |k,v|
+          instance_variable_set("@#{k.underscore}", v)
         end
       elsif attributes.kind_of? String
         @ip = attributes
@@ -60,7 +58,6 @@ module Kickfire
     attr_reader :twitter
     attr_reader :linkedin
     attr_reader :linedkin_id
-    attr_reader :to_json
 
     def isp?
       @is_isp == 1
@@ -72,6 +69,10 @@ module Kickfire
 
     def address
       [street, city, regionShort, postal].compact.join ", "
+    end
+
+    def to_json
+      @raw.to_json
     end
   end
 end

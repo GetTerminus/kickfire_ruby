@@ -52,6 +52,12 @@ RSpec.describe Kickfire::Company do
           expect(Kickfire::Company.find('8.8.8.8').address).to eq '1600 Amphitheatre Parkway, Mountain View, 94043'
         end
       end
+
+      it 'returns json' do
+        VCR.use_cassette('38.140.7.60',) do
+          expect(JSON.parse(Kickfire::Company.find('38.140.7.60').to_json)['name']).to eq "Terminus Software, LLC"
+        end
+      end
     end
   end
 
