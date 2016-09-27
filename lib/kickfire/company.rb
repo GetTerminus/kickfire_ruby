@@ -5,12 +5,16 @@ module Kickfire
 
     def initialize(attributes = nil)
       if attributes.kind_of?(Array) && attributes.first
-        @raw = attributes.first
-        attributes.first.each do |k,v|
-          instance_variable_set("@#{k.underscore}", v)
+        attributes = attributes.first
+      end
+
+      if attributes.kind_of?(Hash)
+        @raw = attributes
+        attributes.each do |k,v|
+          instance_variable_set("@#{k.to_s.underscore}", v)
         end
       elsif attributes.kind_of? String
-        @ip = attributes
+        Kickfire::Company.find(attributes)
       end
     end
 
@@ -60,7 +64,7 @@ module Kickfire
     attr_reader :linedkin_id
 
     def isp?
-      @is_i_s_p == 1
+      @is_isp == 1
     end
 
     def twitter_url
