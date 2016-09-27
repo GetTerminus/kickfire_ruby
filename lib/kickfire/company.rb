@@ -60,7 +60,7 @@ module Kickfire
     attr_reader :linedkin_id
 
     def isp?
-      @is_isp == 1
+      @is_i_s_p == 1
     end
 
     def twitter_url
