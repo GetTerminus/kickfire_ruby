@@ -5,7 +5,6 @@ gemspec
 
 gem 'rspec'
 gem 'httparty'
-gem 'fakeweb'
 gem 'activesupport'
 gem 'webmock'
 gem 'vcr'

@@ -17,9 +17,21 @@ RSpec.describe Kickfire::Company do
         stub_const("Kickfire::API_KEY", "valid_key")
       end
 
-      it 'finds ip with configured key' do
+      it 'finds ip' do
         VCR.use_cassette('8.8.8.8',) do
           expect(Kickfire::Company.find('8.8.8.8').name).to eq 'Google, Inc.'
+        end
+      end
+
+      it 'finds isp' do
+        VCR.use_cassette('1.1.1.1') do
+          expect(Kickfire::Company.find('1.1.1.1').isp?).to eq true
+        end
+      end
+
+      it 'finds Terminus' do
+        VCR.use_cassette('38.140.7.60') do
+          expect(Kickfire::Company.find('38.140.7.60').name).to eq "Terminus Software, LLC"
         end
       end
 
@@ -40,12 +52,12 @@ RSpec.describe Kickfire::Company do
   describe 'kickfire errors' do
     it 'receives error with no api key' do
       VCR.use_cassette('no api key') do
-        expect{ Kickfire::Company.find('8.8.8.8', api_key: nil) }.to raise_error("901 No API Key provided.")
+        expect{ Kickfire::Company.find('8.8.8.8', api_key: nil) }.to raise_error(Kickfire::AuthenticationError, "901 No API Key provided.")
       end
     end
     it 'receives error with invalid api key' do
       VCR.use_cassette('invalid api key') do
-        expect{ Kickfire::Company.find('8.8.8.8', api_key: "invalid key") }.to raise_error("900 Authorization failed!")
+        expect{ Kickfire::Company.find('8.8.8.8', api_key: "invalid key") }.to raise_error(Kickfire::AuthenticationError, "900 Authorization failed!")
       end
     end
   end

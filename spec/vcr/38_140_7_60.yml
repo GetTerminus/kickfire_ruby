@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.kickfire.com/v2/company:(all)?ip=38.140.7.60&key=valid_key
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Sep 2016 18:08:25 GMT
+      Server:
+      - Apache/2.2.15 (CentOS)
+      X-Powered-By:
+      - PHP/5.4.45
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - "*"
+      Content-Length:
+      - '696'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"status":"success","results":1,"data":[{"CID":"5294435","name":"Terminus
+        Software, LLC","website":"terminus.com","street":"3423 Piedmont Road Northeast,
+        Suite 315","city":"Atlanta","regionShort":"GA","region":"Georgia","postal":"30324","countryShort":"US","country":"United
+        States","phone":"888-689-6670","employees":"10 to 50","revenue":"$1,000,000
+        to $5,000,000","category":"Advertising, Nec","sicCode":"7319","category2":"Other
+        Services Related to Advertising","naicsCode":"541890","latitude":"33.8486731","longitude":"-84.3733132","stockSymbol":"","facebook":"terminusB2B","twitter":"terminus","linkedIn":"terminus-account-based-marketing","linkedInID":"5127049","confidence":85,"isISP":0}]}'
+    http_version:
+  recorded_at: Tue, 27 Sep 2016 18:08:25 GMT
+recorded_with: VCR 3.0.3

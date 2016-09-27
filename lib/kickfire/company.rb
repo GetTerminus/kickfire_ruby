@@ -26,11 +26,11 @@ module Kickfire
       response = HTTParty.get("#{BASE_URL}#{BASE_QUERY}?#{URI.encode_www_form({ip: ip, key: api_key})}")
 
       if !response
-        raise StandardError.new('No data returned from Kickfire')
+        raise Kickfire::Error.new('No data returned from Kickfire')
       end
 
       if response && response['status'] == 'error'
-        raise StandardError.new("#{response['code']} #{response['message']}")
+        Kickfire::Error.find(response['code'],response['message'])
       end
 
       new(response['data'])
@@ -60,8 +60,11 @@ module Kickfire
     attr_reader :twitter
     attr_reader :linkedin
     attr_reader :linedkin_id
-    attr_reader :isp
     attr_reader :to_json
+
+    def isp?
+      @is_isp == 1
+    end
 
     def twitter_url
       "http://twitter.com/" + twitter

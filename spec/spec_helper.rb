@@ -4,7 +4,6 @@ require 'active_support/all'
 
 # Require webmock and VCR to test requests
 require 'webmock/rspec'
-require "fakeweb"
 
 require 'vcr'
 require 'rspec'
@@ -21,14 +20,6 @@ end
 
 
 RSpec.configure do |config|
-  config.before(:suite) do
-    FakeWeb.allow_net_connect = false
-  end
-
-  config.after(:suite) do
-    FakeWeb.allow_net_connect = true
-  end
-
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
