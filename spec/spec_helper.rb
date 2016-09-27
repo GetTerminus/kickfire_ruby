@@ -22,7 +22,7 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
-    #FakeWeb.allow_net_connect = false
+    FakeWeb.allow_net_connect = false
   end
 
   config.after(:suite) do
