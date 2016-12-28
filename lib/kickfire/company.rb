@@ -25,7 +25,10 @@ module Kickfire
         end
       end
 
-      response = HTTParty.get("#{BASE_URL}#{BASE_QUERY}?#{URI.encode_www_form({ip: ip, key: api_key})}")
+      uri = URI("#{BASE_URL}#{BASE_QUERY}")
+      params = { ip: ip, key: api_key }
+      uri.query = URI.encode_www_form(params)
+      response = ::HTTParty.get(uri)
 
       if !response
         raise Kickfire::Error.new('No data returned from Kickfire')
